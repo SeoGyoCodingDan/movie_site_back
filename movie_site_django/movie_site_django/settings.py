@@ -23,14 +23,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECRET_KEY = 'django-insecure-jtbyu*^ci#c#kc$rjlm&nhx9)b^nhyzy3u23h%t0_30pt#+zf3'
 import os, json
 from django.core.exceptions import ImproperlyConfigured
-secret_file = os.path.join(BASE_DIR, 'secrets.json')
-with open(secret_file, 'r') as f :
-    secrets = json.load(f)
-try :
-    SECRET_KEY = secrets['SECRET_KEY']
-except KeyError :
-    err_msg = "Set SECRET_KEY fail"
-    raise ImproperlyConfigured(err_msg)
+
+def get_key_from_secrets(target):
+    secret_file = os.path.join(BASE_DIR, 'secrets.json')
+    with open(secret_file, 'r') as f :
+        secrets = json.load(f)
+    try :
+        ret = secrets[target]
+    except KeyError :
+        err_msg = f"Set {target} fail"
+        raise ImproperlyConfigured(err_msg)
+    return ret
+
+SECRET_KEY = get_key_from_secrets("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -83,12 +88,14 @@ WSGI_APPLICATION = 'movie_site_django.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = get_key_from_secrets("DATABASES")
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 
 
 # Password validation
