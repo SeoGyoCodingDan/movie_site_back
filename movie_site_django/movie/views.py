@@ -7,6 +7,7 @@ from collections import defaultdict
 
 SEARCH_FIELD = ['movienm', 'prdtstatnm', 'genrealt'] # 개봉상태, 장르, 영화 이름
 
+# 나중에 개봉->상영으로 바꾸기 (상영 영화 가져오고 스케쥴링 할 수 있는 기능 만들고 나면)
 class MovieShowingView(ListAPIView):
     serializer_class = MovieListSerializer
     pagination_class = MovieListPagination
