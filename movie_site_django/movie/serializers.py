@@ -5,11 +5,11 @@ class MovieListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
-        fields = ['movienm', 'posterurl']
+        fields = ['moviecd', 'movienm', 'posterurl']
 
 
 class MovieInfoSerializer(serializers.ModelSerializer):
 
     class Meta :
         model = Movie
-        fields = ['movienm', 'prdtyear', 'opendt', 'prdtstatnm', 'repnationnm', 'posterurl',]
+        fields = ['moviecd', 'movienm', 'prdtyear', 'opendt', 'prdtstatnm', 'repnationnm', 'posterurl',]

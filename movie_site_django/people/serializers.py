@@ -5,7 +5,7 @@ class PersonInfoSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = People
-        fields = ['peoplenm', 'sex', 'reprolenm']
+        fields = ['peoplecd', 'peoplenm', 'sex', 'reprolenm']
 
 
 class FilmoListSerializer(serializers.Serializer):

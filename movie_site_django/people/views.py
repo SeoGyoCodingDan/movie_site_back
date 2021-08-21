@@ -16,7 +16,7 @@ class FilmoListView(ListAPIView):
 
     def get_queryset(self):
         people_code = self.kwargs['pk']
-        movies = Movie.objects.filter(filmo__peoplecd=people_code).values('posterurl', 'movienm','filmo')
+        movies = Movie.objects.filter(filmo__peoplecd=people_code).values('posterurl', 'movienm', 'filmo')
         print(f"movies : {movies}")
 
         for idx, movie in enumerate(movies):
