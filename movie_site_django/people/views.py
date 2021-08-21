@@ -34,7 +34,7 @@ class MovieDetailPeopleListView(ListAPIView):
 
     def get_queryset(self):
         movie_code = self.kwargs['pk']
-        people = People.objects.filter(filmo__moviecd=movie_code).values('peoplenm','sex','reprolenm', 'filmo')
+        people = People.objects.filter(filmo__moviecd=movie_code).values('peoplecd', 'peoplenm', 'sex', 'reprolenm', 'filmo')
 
         for idx, person in enumerate(people) :
             filmo = Filmo.objects.get(pk=person['filmo'])
